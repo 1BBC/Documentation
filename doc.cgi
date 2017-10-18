@@ -29,7 +29,7 @@ my $simplified_to_dir;
 if($FORM{TREE}){
   $simplified_to_dir = $FORM{TREE};
   $simplified_to_dir =~ s/$simplified_dir//;
-  print $html->tpl_show(templates('three'), {TITLE => $simplified_to_dir, OUTPUT2RETURN => 1});
+  print $html->tpl_show(templates('three'), {TITLE => $simplified_to_dir}, {OUTPUT2RETURN => 1});
   find_finished_files($FORM{TREE});
 }
 if($FORM{OPEN}){
@@ -38,7 +38,7 @@ my $file_name = $TO_DIR . '/' . $FORM{OPEN};
 my $file_content = `perldoc -ohtml -T -F $file_name`;
 if (-f $file_name && $file_name !~ m/\.\./){
   $file_name =~ s/.*\///;
-  print $html->tpl_show(templates('open'), {TITLE => $file_name, FILE_CONTENT => $file_content ,OUTPUT2RETURN => 1});
+  print $html->tpl_show(templates('open'), {TITLE => $file_name, FILE_CONTENT => $file_content}, {OUTPUT2RETURN => 1});
   
 }
 else {
@@ -51,7 +51,7 @@ unless($FORM{TREE}){
   `rm -r $TO_DIR`;
   $simplified_to_dir = $TO_DIR;
   $simplified_to_dir =~ s/$simplified_dir//;
-  print $html->tpl_show(templates('three'), {TITLE => $simplified_to_dir, OUTPUT2RETURN => 1});
+  print $html->tpl_show(templates('three'), {TITLE => $simplified_to_dir}, {OUTPUT2RETURN => 1});
   find_files($FROM_DIR);
   find_finished_files($TO_DIR);
 }
